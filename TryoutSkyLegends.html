@@ -10,10 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 2. DEFINIÇÃO DA NOVA PALETA DE CORES E FONTES --- */
         :root {
-            --cor-fundo: #121212; /* Preto (tema escuro) */
-            --cor-container: rgba(28, 28, 30, 0.8); /* Vidro escuro semi-transparente */
+            --cor-fundo: #121212; 
+            --cor-container: rgba(28, 28, 30, 0.8); 
             --cor-texto: #f0f0f0;
             --cor-texto-label: #aaa;
             --cor-laranja-haikyuu: #FF6600;
@@ -29,15 +28,16 @@
             padding: 0;
         }
 
-        /* --- 3. NOVOS ESTILOS DO BODY E FUNDO --- */
         body {
             font-family: var(--font-body);
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             line-height: 1.6;
-            padding: 40px 20px; /* Mais espaço no topo */
+            /* Padding maior no topo para o menu fixo (no mobile) */
+            padding: 120px 20px 40px 20px; 
             position: relative; 
             z-index: 1; 
+            overflow-x: hidden; /* Previne scroll horizontal */
         }
 
         body::before {
@@ -48,14 +48,13 @@
             width: 100%;
             height: 100%;
             z-index: -1; 
-            background-image: url('logo_sky_legends.jpg'); 
+            background-image: url('fotos/logo_sky_legends.jpg'); 
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover; 
             opacity: 0.05; 
         }
 
-        /* --- 4. NOVOS TÍTULOS (ESTILO ANIME) --- */
         h1, h2, h3 {
             font-family: var(--font-header);
             text-transform: uppercase;
@@ -76,7 +75,7 @@
             border-bottom: 2px solid #444;
             padding-bottom: 5px;
             color: var(--cor-texto-label);
-            text-shadow: none; /* Só o H1 e H3 terão o brilho */
+            text-shadow: none; 
         }
 
         h3 {
@@ -84,18 +83,13 @@
             color: var(--cor-laranja-haikyuu);
         }
 
-
-        /* --- 5. O CONTAINER (EFEITO VIDRO FUTURISTA) --- */
         .container {
             background-color: var(--cor-container);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 15px;
-            
             box-shadow: 0 0 25px rgba(0, 175, 255, 0.25);
-            
             padding: 30px;
             position: relative; 
             z-index: 2;
@@ -105,7 +99,6 @@
             animation: slideUp 0.8s ease-out 0.2s forwards;
         }
         
-        /* Containers secundários (para a área de resultado) */
         #resultadoArea .container {
             box-shadow: 0 0 25px rgba(0, 175, 255, 0.15);
             margin-top: 30px;
@@ -118,7 +111,6 @@
             }
         }
 
-        /* --- 6. NOVOS INPUTS E LABELS (ESTILO TECH) --- */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -162,7 +154,6 @@
             background-color: rgba(0, 0, 0, 0.2);
         }
 
-        /* --- 7. BOTÕES COM EFEITO NEON --- */
         button {
             width: 100%;
             padding: 15px;
@@ -204,7 +195,6 @@
             box-shadow: 0 0 25px 0px var(--cor-azul-neon);
         }
 
-        /* --- 8. ÁREA DE TEXTO (RESULTADOS) --- */
         #resultadoArea {
             margin-top: 30px;
         }
@@ -227,45 +217,45 @@
             border-color: var(--cor-laranja-haikyuu);
         }
 
-        /* --- 9. ESTILOS DA NAVBAR "ESCONDIDA" (CÓDIGO NOVO) --- */
-
+        /* --- NAVBAR "ESCONDIDA" (PARA DESKTOP) --- */
         .navbar-trigger {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 20px; /* Altura da zona de trigger */
-            z-index: 1001; /* Fica em cima de tudo */
+            height: 20px; 
+            z-index: 1001; 
         }
         
         .navbar {
-            /* Posição e Fundo */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
             padding: 1.2rem 0;
-            
-            /* Efeito Vidro (para combinar com o site) */
             background-color: rgba(26, 26, 26, 0.9); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid #444;
-
-            /* --- EFEITO DE SUMIR (Default) --- */
             opacity: 0;
-            transform: translateY(-100%); /* Escondida para cima */
-            pointer-events: none; /* Não pode ser clicada */
+            transform: translateY(-100%); 
+            pointer-events: none; 
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        /* --- A MÁGICA DO EFEITO --- */
         .navbar-trigger:hover + .navbar,
         .navbar:hover {
             opacity: 1;
-            transform: translateY(0); /* Posição normal */
-            pointer-events: auto; /* Agora pode ser clicada */
+            transform: translateY(0); 
+            pointer-events: auto; 
+        }
+
+        /* --- MUDANÇA AQUI: Classe que o JS vai adicionar --- */
+        .navbar.navbar-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .navbar-container {
@@ -320,7 +310,6 @@
             color: var(--cor-fundo) !important;
         }
 
-        /* --- AJUSTE FINAL --- */
         body > h1 {
             transition: margin-top 0.4s ease; 
         }
@@ -329,6 +318,59 @@
              margin-top: 110px; 
         }
 
+        /* --- CÓDIGO DE RESPONSIVIDADE ATUALIZADO --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 100px 10px 20px 10px; /* Padding no topo para o menu fixo */
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 0 !important; 
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* --- CORREÇÃO DA NAVBAR --- */
+            .navbar-trigger {
+                display: none; /* Desliga o 'hover' do desktop */
+            }
+
+            .navbar {
+                /* Força a navbar a ficar visível por padrão */
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+                /* Adiciona transição para o JS */
+                transition: transform 0.4s ease;
+            }
+
+            .navbar-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0.5rem 20px; 
+            }
+
+            .nav-logo {
+                font-size: 1.5rem;
+            }
+
+            .navbar .cta-button {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.9rem;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -345,6 +387,7 @@
             </nav>
         </div>
     </header>
+
     <h1>🏐 CALCULADORA DE TRYOUT 🏐</h1>
 
     <div class="container">
@@ -404,7 +447,8 @@
     </div>
 
     <div id="resultadoArea" style="display: none;">
-        <div class="container"> <h2 class="full-width">Resultados Gerados</h2>
+        <div class="container"> 
+            <h2 class="full-width">Resultados Gerados</h2>
             
             <h3>Texto Público (Chat Geral)</h3>
             <textarea id="textoPublico" readonly></textarea>
@@ -417,7 +461,27 @@
     </div>
 
     <script>
-        // Pesos
+        // --- NOVO SCRIPT PARA ESCONDER NAVBAR AO ROLAR ---
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', function() {
+            // Verifica se estamos no mobile
+            if (window.innerWidth <= 768) { 
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Rolando para BAIXO (e já passou do topo)
+                    navbar.classList.add('navbar-hidden');
+                } else {
+                    // Rolando para CIMA
+                    navbar.classList.remove('navbar-hidden');
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Para lidar com o "pulo" no iOS
+            }
+        });
+        
+        // --- SCRIPT ANTIGO DA CALCULADORA ---
         const PESOS = {
             Setter: { saque: 0.15, ataque: 0.15, defesa: 0.15, levantamento: 0.35, bloqueio: 0.10, comunicacao: 0.10 },
             Spiker: { saque: 0.20, ataque: 0.35, defesa: 0.10, levantamento: 0.10, bloqueio: 0.15, comunicacao: 0.10 },
@@ -425,7 +489,6 @@
             Libero: { saque: 0.15, ataque: 0.10, defesa: 0.40, levantamento: 0.10, bloqueio: 0.10, comunicacao: 0.15 }
         };
 
-        // Classificação e Cores
         function getClassificacao(media) {
             if (media >= 9.0) {
                 return { nivel: "⭐ Elite", status: "Titular garantido" };
@@ -439,7 +502,6 @@
         }
         
         function calcularTryout() {
-            // 1. Obter todos os dados
             const nome = document.getElementById("nome").value || "Nome não preenchido";
             const discordUser = document.getElementById("discordUser").value || "ID não preenchido";
             const posicao = document.getElementById("posicao").value;
@@ -452,7 +514,6 @@
                 comunicacao: parseFloat(document.getElementById("comunicacao").value) || 0
             };
             
-            // 2. Calcular Média e Status
             const pesos = PESOS[posicao];
             let mediaFinal = 0;
             mediaFinal += notas.saque * pesos.saque;
@@ -464,7 +525,6 @@
 
             const classificacao = getClassificacao(mediaFinal);
             
-            // 3. GERAÇÃO DO TEXTO PÚBLICO
             const templatePublico = `╔═════════════════════════╗
 🏐  𝐑𝐄𝐒𝐔𝐋𝐓𝐀𝐃𝐎 𝐃𝐎 𝐓𝐑𝐘𝐎𝐔𝐓  -  𝐒𝐊𝐘 𝐋𝐄𝐆𝐄𝐍𝐃𝐒  🏐
 ╚═════════════════════════════╝
@@ -486,7 +546,6 @@ O **feedback detalhado** será enviado **no privado**.`;
                 .replace('{Nível}', classificacao.nivel)
                 .replace('{Status}', classificacao.status);
 
-            // 4. GERAÇÃO DO TEXTO PRIVADO
             const templatePrivado = `╔═════════════════════════╗
 💌  𝐅𝐄𝐄𝐃𝐁𝐀𝐂𝐊 𝐃𝐄𝐓𝐀𝐋𝐇𝐀𝐃𝐎  -   𝐒𝐊𝐘 𝐋𝐄𝐆𝐄𝐍𝐃𝐒  💌
 ╚═════════════════════════════╝
@@ -516,7 +575,7 @@ Você fez parte da história da **Sky Legends** 💙`;
             const textoPrivadoFinal = templatePrivado
                 .replace('{Nome do Jogador}', nome)
                 .replace('{Posição}', posicao)
-                .replace('{Média Final}', mediaFinal.toFixed(2)) // Arredonda a média
+                .replace('{Média Final}', mediaFinal.toFixed(2))
                 .replace('{Nível}', classificacao.nivel)
                 .replace('{Status}', classificacao.status)
                 .replace('{Nota Saque}', notas.saque)
@@ -526,14 +585,12 @@ Você fez parte da história da **Sky Legends** 💙`;
                 .replace('{Nota Bloqueio}', notas.bloqueio)
                 .replace('{Nota Comunicação}', notas.comunicacao);
 
-            // 5. Exibir tudo
             document.getElementById("resultadoArea").style.display = "block";
             
             document.getElementById("textoPublico").value = textoPublicoFinal; 
             document.getElementById("textoPrivado").value = textoPrivadoFinal;
         }
 
-        // Função de copiar
         function copiarTexto(elementId, button) {
             const jsonTexto = document.getElementById(elementId);
             jsonTexto.select(); 
