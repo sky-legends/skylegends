@@ -1,0 +1,612 @@
+/* --- 1. IMPORTAÇÃO DAS FONTES (AGORA AQUI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Poppins:wght@300;400&display=swap');
+
+/* --- 2. RESET E VARIÁVEIS GLOBAIS (NOVAS CORES DA LOGO) --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Paleta de Cores da LOGO SKY LEGENDS */
+    --cor-fundo: #0a0a0e; /* Preto Azulado Escuro */
+    --cor-fundo-secundaria: #161a22; /* Azul Escuro um pouco mais claro */
+    --cor-azul-principal: #008DDA; /* Azul base da logo */
+    --cor-azul-claro: #00AFFF;   /* Azul claro dos detalhes */
+    --cor-texto-claro: #e0e0e0;
+    --cor-texto-neutro: #a0a0a0; /* Cinza para textos secundários */
+    --cor-vitoria: #4CAF50; /* Verde */
+    --cor-derrota: #F44336; /* Vermelho */
+
+    /* Fontes */
+    --font-header: 'Teko', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-claro);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- EFEITO SUTIL DE FADE-IN (Animação!) --- */
+body {
+    opacity: 0; 
+    animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+
+/* --- 3. NAVBAR (COM A LOGO E NOVAS CORES) --- */
+.navbar {
+    background-color: var(--cor-fundo-secundaria);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(var(--cor-azul-principal), 0.3); /* Linha sutil */
+    position: fixed; 
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo img { /* Estilizando a imagem da logo no navbar */
+    height: 40px; /* Tamanho da logo */
+    transition: transform 0.3s ease;
+}
+
+.nav-logo img:hover {
+    transform: scale(1.05); /* Pequena animação ao passar o mouse */
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-link {
+    font-family: var(--font-body);
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--cor-azul-claro); /* Cor de destaque da logo */
+}
+
+/* --- Botão de Destaque (CTA) --- */
+.cta-button {
+    background-color: var(--cor-azul-principal);
+    color: white !important; 
+    border-radius: 5px;
+    padding: 0.6rem 1.2rem !important;
+    font-family: var(--font-header); 
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    font-size: 1rem; 
+    box-shadow: 0 4px 10px rgba(0, 141, 218, 0.3); /* Sombra azul sutil */
+    text-decoration: none; /* Garante que o <a> não tenha sublinhado */
+}
+
+.cta-button:hover {
+    background-color: var(--cor-azul-claro); /* Fica mais claro ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de "levantar" */
+    box-shadow: 0 6px 15px rgba(0, 175, 255, 0.4);
+}
+
+.secondary-cta { /* Para botões secundários */
+    background-color: transparent;
+    border: 1px solid var(--cor-azul-principal);
+    color: var(--cor-azul-principal) !important;
+    box-shadow: none;
+}
+
+.secondary-cta:hover {
+    background-color: var(--cor-azul-principal);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 141, 218, 0.3);
+}
+
+
+/* --- SEÇÃO HERO (Principal) --- */
+.hero {
+    height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    
+    padding-top: 80px; 
+    position: relative;
+    overflow: hidden; 
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-image: url('fotos/logo_sky_legends.jpg');
+    
+    background-size: cover;
+    background-position: center;
+    
+    animation: kenBurns 20s infinite alternate ease-in-out;
+    
+    z-index: -2; 
+}
+
+
+.hero::after { /* O brilho */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(0,141,218,0.15) 0%, rgba(0,0,0,0) 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1; 
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1; /* O conteúdo fica na frente de tudo */
+}
+
+.hero h1 {
+    font-family: var(--font-header);
+    font-size: 4.5rem; 
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cor-texto-claro);
+    text-shadow: 0 0 10px var(--cor-azul-claro), 0 0 20px rgba(0, 141, 218, 0.7); 
+    
+    padding-top: 100px; 
+}
+
+.hero p {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem; 
+    color: var(--cor-texto-neutro);
+}
+
+/* --- Seções Genéricas --- */
+section {
+    padding: 6rem 0; 
+    text-align: center;
+}
+
+/* --- SEÇÃO "PRÓXIMO DESAFIO" --- */
+.info-section {
+    background-color: var(--cor-fundo-secundaria);
+}
+
+.info-section h2 {
+    font-family: var(--font-header);
+    font-size: 3rem;
+    margin-bottom: 2rem; 
+    text-transform: uppercase;
+    color: var(--cor-azul-claro);
+    text-shadow: 0 0 8px rgba(0, 175, 255, 0.5);
+    border-bottom: 2px solid var(--cor-azul-principal); 
+    padding-bottom: 10px;
+    display: inline-block; 
+}
+
+.match-details {
+    margin-bottom: 2.5rem;
+}
+
+/* --- ESTILO DOS NOMES DOS TIMES --- */
+.match-teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.team-home, .team-away {
+    font-family: var(--font-header);
+    font-size: 2.5rem; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.team-home {
+    color: var(--cor-azul-claro); 
+    text-shadow: 0 0 8px rgba(0, 175, 255, 0.5);
+}
+
+.team-away {
+    color: var(--cor-texto-claro); 
+}
+
+.team-vs {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--cor-texto-neutro);
+    font-weight: bold;
+    transform: translateY(-5px); 
+}
+
+.match-time {
+    font-family: var(--font-body);
+    font-size: 1.2rem; 
+    color: var(--cor-texto-neutro);
+    line-height: 1.8;
+}
+
+
+.info-section .secondary-cta {
+    display: inline-block; 
+}
+
+
+/* --- TABELA DE JOGOS (ESCONDIDA) --- */
+.schedule-table-container {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, max-height 0.5s ease-out, margin-top 0.5s ease-out;
+}
+
+.schedule-table-container.visible {
+    opacity: 1;
+    max-height: 1000px; 
+    margin-top: 2.5rem;
+}
+
+table.schedule {
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(var(--cor-azul-principal), 0.3);
+    text-align: left;
+}
+
+table.schedule th, table.schedule td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(var(--cor-azul-principal), 0.2);
+}
+
+table.schedule th {
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--cor-azul-claro);
+    text-transform: uppercase;
+}
+
+table.schedule td {
+    font-family: var(--font-body);
+    color: var(--cor-texto-neutro);
+    font-size: 1rem;
+}
+
+table.schedule tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.schedule .status-win {
+    color: var(--cor-vitoria);
+    font-weight: bold;
+}
+
+table.schedule .status-loss {
+    color: var(--cor-derrota);
+    font-weight: bold;
+}
+
+
+/* --- Seção de Destaques (com o efeito de scale) --- */
+.highlights-section {
+    background-color: var(--cor-fundo);
+    padding-bottom: 8rem; 
+}
+
+.highlights-section h2 {
+    font-family: var(--font-header);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    color: var(--cor-azul-claro);
+    text-shadow: 0 0 8px rgba(0, 175, 255, 0.5);
+    border-bottom: 2px solid var(--cor-azul-principal); 
+    padding-bottom: 10px;
+    display: inline-block; 
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;
+    margin-top: 3rem;
+}
+
+.highlight-item {
+    background-color: var(--cor-fundo-secundaria);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 141, 218, 0.2);
+    box-shadow: 0 0 20px rgba(0, 175, 255, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden; 
+    transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
+}
+
+.highlight-item::before { 
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,175,255,0.2) 0%, rgba(0,0,0,0) 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.highlight-item:hover {
+    transform: translateY(-10px) scale(1.7); 
+    box-shadow: 0 10px 30px rgba(0, 175, 255, 0.3);
+    opacity: 1; 
+    z-index: 10; 
+}
+
+.highlights-grid:hover > .highlight-item:not(:hover) {
+    transform: scale(0.75); 
+    opacity: 0.5; 
+    box-shadow: 0 0 15px rgba(0, 175, 255, 0.1); 
+}
+
+
+.highlight-item:hover::before {
+    opacity: 1;
+}
+
+.highlight-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--cor-azul-principal);
+    box-shadow: 0 0 15px rgba(0, 141, 218, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-item h3 {
+    font-family: var(--font-header);
+    font-size: 2rem;
+    color: var(--cor-azul-claro);
+    /* ================== */
+    /* == MUDANÇA AQUI == */
+    /* ================== */
+    margin-bottom: 0.25rem; /* Diminuí a margem para o nome caber */
+    text-shadow: none; 
+    position: relative;
+    z-index: 1;
+}
+
+/* ================== */
+/* == MUDANÇA AQUI == */
+/* ================== */
+.player-name {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600; /* Um pouco mais que 'bold' */
+    color: var(--cor-texto-claro); /* Branco */
+    margin-bottom: 1rem; /* Espaço antes da descrição */
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-item p {
+    font-family: var(--font-body);
+    color: var(--cor-texto-neutro);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- SEÇÃO DE TIKTOK == --- */
+.tiktok-section {
+    background-color: var(--cor-fundo-secundaria);
+    padding: 6rem 0;
+}
+
+.tiktok-section h2 {
+    font-family: var(--font-header);
+    font-size: 3rem;
+    margin-bottom: 1rem; 
+    text-transform: uppercase;
+    color: var(--cor-azul-claro);
+    text-shadow: 0 0 8px rgba(0, 175, 255, 0.5);
+    border-bottom: 2px solid var(--cor-azul-principal); 
+    padding-bottom: 10px;
+    display: inline-block; 
+}
+
+.tiktok-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--cor-texto-neutro);
+    margin-bottom: 3rem;
+}
+
+.tiktok-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.tiktok-card {
+    border-radius: 10px;
+    overflow: hidden; 
+    background-color: var(--cor-fundo);
+    border: 1px solid rgba(var(--cor-azul-principal), 0.3);
+    min-height: 500px; 
+    box-shadow: 0 0 20px rgba(0, 175, 255, 0.1);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.tiktok-embed {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important; 
+}
+
+.tiktok-section .cta-button {
+    background-color: #ff0050; /* Cor do TikTok */
+    border: none;
+    box-shadow: 0 4px 10px rgba(255, 0, 80, 0.3);
+}
+
+.tiktok-section .cta-button:hover {
+    background-color: #ff337a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 0, 80, 0.4);
+}
+
+
+/* --- Rodapé --- */
+.footer {
+    padding: 3rem 0; 
+    background-color: #0d0d12; 
+    text-align: center;
+    border-top: 1px solid rgba(var(--cor-azul-principal), 0.3);
+    color: var(--cor-texto-neutro);
+    font-size: 0.9rem;
+}
+
+/* --- RESPONSIVIDADE (BÁSICA) --- */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+    }
+    .nav-menu {
+        margin-top: 1rem;
+    }
+    .hero h1 {
+        font-size: 3rem;
+        padding-top: 50px; 
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+    .info-section h2, .highlights-section h2, .tiktok-section h2 {
+        font-size: 2.2rem;
+    }
+
+    .highlights-grid:hover > .highlight-item:not(:hover) {
+        transform: none;
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(0, 175, 255, 0.1);
+    }
+    .highlight-item:hover {
+        transform: translateY(-10px) scale(1.1); 
+    }
+
+    .tiktok-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-home, .team-away {
+        font-size: 2rem;
+    }
+    .team-vs {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .nav-logo img {
+        height: 30px;
+    }
+    .nav-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+    .nav-link {
+        padding: 0.3rem 0.6rem;
+    }
+
+    .match-teams {
+        gap: 1rem;
+    }
+    .team-home, .team-away {
+        font-size: 1.8rem;
+    }
+    .team-vs {
+        font-size: 0.9rem;
+    }
+    .match-time {
+        font-size: 1rem;
+    }
+}
+
+/* --- ANIMAÇÃO KEN BURNS --- */
+@keyframes kenBurns {
+    from {
+        transform: scale(1) translateX(0) translateY(0);
+    }
+    to {
+        transform: scale(1.1) translateX(-20px) translateY(-10px); 
+    }
+}
